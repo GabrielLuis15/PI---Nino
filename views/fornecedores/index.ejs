@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	 <link rel="icon" href="/pictures/DB.png">
+	<title>Fornecedores</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<%- include('../partials/nav') %>
+
+		<div class="container mt-4">
+			<!-- FORMULÁRIO -->
+			<div class="card shadow-sm mb-4">
+				<div class="card-body">
+					<h5 class="mb-3"><%= fornecedorEditar ? '✏️ Editar' : '➕ Novo' %> Fornecedor
+					</h5>
+					
+					<form action="<%= fornecedorEditar ? '/fornecedores/editar/' + fornecedorEditar.id : '/fornecedores/salvar' %>" method="POST">
+						<div class="mb-3">
+							<label class="form-label">Nome</label>
+							<input type="text" 
+							name="nome" 
+							class="form-control form-control-lg" required
+							value="<%= fornecedorEditar ? fornecedorEditar.nome : '' %>">
+
+							<label class="form-label">CNPJ</label>
+		                	<input 
+							type="text" 
+							name="cnpj" 
+							class="form-control form-control-lg" required
+							value="<%= fornecedorEditar ? fornecedorEditar.cnpj : '' %>">
+						</div>
+						<div class="d-grid">
+
+							<button class="btn btn-<%= fornecedorEditar ? 'success' : 'primary' %>"><%= fornecedorEditar ? 'Atualizar' : 'Salvar' %></button>
+
+							<% if(fornecedorEditar){ %>
+
+							<a href="/fornecedores" class="btn btn-secondary mt-2">
+								Cancelar
+							</a>
+
+						<% } %>
+
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="container mt-4">
+				<div class="d-flex justify-content-between align-items-center mb-3">
+					<h4 class="mb-0">📂 Fornecedores</h4>
+					<a href="/fornecedores/nova" class="btn btn-success btn-sm">
+						+ Nova
+					</a>
+				</div>
+				<!-- 🖥️ DESKTOP (TABELA) -->
+				<div class="d-none d-md-block">
+					<table class="table table-bordered table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>CNPJ</th>
+								<th width="150">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% fornecedores.forEach(cat=> { %>
+								<tr>
+									<td>
+										<%= cat.id %>
+									</td>
+									<td>
+										<%= cat.nome %>
+									</td>
+									<td>
+										<%= cat.cnpj %>
+									</td>
+									<td>
+										<a href="/fornecedores/editar/<%= cat.id %>" class="btn btn-warning btn-sm">
+											Editar
+										</a>
+										<a href="/fornecedores/excluir/<%= cat.id %>" class="btn btn-danger btn-sm"
+											onclick="return confirm('Deseja excluir este fornecedor?')">
+											Excluir
+										</a>
+									</td>
+								</tr>
+								<% }) %>
+						</tbody>
+					</table>
+				</div>
+				<!-- 📱 MOBILE (CARDS) -->
+				<div class="d-md-none">
+					<% fornecedores.forEach(cat=> { %>
+						<div class="card mb-3 shadow-sm">
+							<div class="card-body">
+								<h5 class="card-title">
+									<%= cat.nome %>
+								</h5>
+								<p class="card-text text-muted">
+									ID: <%= cat.id %>
+								</p>
+								<p class="card-text text-muted">
+									CNPJ: <%= cat.cnpj %>
+								</p>
+								<div class="d-grid gap-2">
+									<a href="/fornecedores/editar/<%= cat.id %>" class="btn btn-warning btn-sm">
+										✏️ Editar
+									</a>
+									<a href="/fornecedores/excluir/<%= cat.id %>" class="btn btn-danger btn-sm"
+										onclick="return confirm('Deseja excluir este fornecedor?')">
+										❌ Excluir
+									</a>
+								</div>
+							</div>
+						</div>
+						<% }) %>
+				</div>
+				<a href="/" class="btn btn-secondary w-100 mt-3">Voltar</a>
+			</div>
+			<%- include('../partials/footer') %>
+</body>
+
+</html>

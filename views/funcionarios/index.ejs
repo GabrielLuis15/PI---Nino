@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	 <link rel="icon" href="/pictures/DB.png">
+	<title>Funcionários</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+	<%- include('../partials/nav') %>
+
+		<div class="container mt-4">
+			<!-- FORMULÁRIO -->
+			<div class="card shadow-sm mb-4">
+				<div class="card-body">
+					<h5 class="mb-3"><%= funcionarioEditar ? '✏️ Editar' : '➕ Novo' %> Funcionário
+					</h5>
+					
+					<form action="<%= funcionarioEditar ? '/funcionarios/editar/' + funcionarioEditar.id : '/funcionarios/salvar' %>" method="POST">
+						<div class="mb-3">
+							<label class="form-label">Nome</label>
+							<input type="text" 
+							name="nome" 
+							class="form-control form-control-lg" required
+							value="<%= funcionarioEditar ? funcionarioEditar.nome : '' %>">
+
+							<label class="form-label">Email</label>
+		                	<input 
+							type="email" 
+							name="email" 
+							class="form-control form-control-lg" required
+							value="<%= funcionarioEditar ? funcionarioEditar.email : '' %>">
+
+							<label class="form-label">Cargo</label>
+		                	<input 
+							type="text" 
+							name="cargo" 
+							class="form-control form-control-lg" required
+							value="<%= funcionarioEditar ? funcionarioEditar.cargo : '' %>">
+
+						</div>
+						<div class="d-grid">
+
+							<button class="btn btn-<%= funcionarioEditar ? 'success' : 'primary' %>"><%= funcionarioEditar ? 'Atualizar' : 'Salvar' %></button>
+
+							<% if(funcionarioEditar){ %>
+
+							<a href="/funcionarios" class="btn btn-secondary mt-2">
+								Cancelar
+							</a>
+
+						<% } %>
+
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="container mt-4">
+				<div class="d-flex justify-content-between align-items-center mb-3">
+					<h4 class="mb-0">📂 Funcionários</h4>
+					<a href="/funcionarios/nova" class="btn btn-success btn-sm">
+						+ Nova
+					</a>
+				</div>
+				<!-- 🖥️ DESKTOP (TABELA) -->
+				<div class="d-none d-md-block">
+					<table class="table table-bordered table-hover">
+						<thead class="table-dark">
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Email</th>
+								<th>Cargo</th>
+								<th width="150">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% funcionarios.forEach(cat=> { %>
+								<tr>
+									<td>
+										<%= cat.id %>
+									</td>
+									<td>
+										<%= cat.nome %>
+									</td>
+									<td>
+										<%= cat.email %>
+									</td>
+									<td>
+										<%= cat.cargo %>
+									</td>
+									<td>
+										<a href="/funcionarios/editar/<%= cat.id %>" class="btn btn-warning btn-sm">
+											Editar
+										</a>
+										<a href="/funcionarios/excluir/<%= cat.id %>" class="btn btn-danger btn-sm"
+											onclick="return confirm('Deseja excluir este funcionário?')">
+											Excluir
+										</a>
+									</td>
+								</tr>
+								<% }) %>
+						</tbody>
+					</table>
+				</div>
+				<!-- 📱 MOBILE (CARDS) -->
+				<div class="d-md-none">
+					<% funcionarios.forEach(cat=> { %>
+						<div class="card mb-3 shadow-sm">
+							<div class="card-body">
+
+								<h5 class="card-title">
+									<%= cat.nome %>
+								</h5>
+								<p class="card-text text-muted">
+									ID: <%= cat.id %>
+								</p>
+								<p class="card-text text-muted">
+									Email: <%= cat.email %>
+								</p>
+								<p class="card-text text-muted">
+									Cargo: <%= cat.cargo %>
+								</p>
+								<div class="d-grid gap-2">
+									<a href="/funcionarios/editar/<%= cat.id %>" class="btn btn-warning btn-sm">
+										✏️ Editar
+									</a>
+									<a href="/funcionarios/excluir/<%= cat.id %>" class="btn btn-danger btn-sm"
+										onclick="return confirm('Deseja excluir este funcionário?')">
+										❌ Excluir
+									</a>
+								</div>
+							</div>
+						</div>
+						<% }) %>
+				</div>
+				<a href="/" class="btn btn-secondary w-100 mt-3">Voltar</a>
+			</div>
+			<%- include('../partials/footer') %>
+</body>
+
+</html>

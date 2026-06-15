@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nome": "Fernando",
+    "email": "fermatos@gmail.com",
+    "cargo": "Professor"
+  },
+  {
+    "id": 2,
+    "nome": "Fátima",
+    "email": "bernardesfat@gmail.com",
+    "cargo": "Coordenadora"
+  },
+  {
+    "id": 3,
+    "nome": "André",
+    "email": "andremateus@gmail.com",
+    "cargo": "Diretor"
+  },
+  {
+    "id": 4,
+    "nome": "Cleusa",
+    "email": "dominguescleusa@gmail.com",
+    "cargo": "Cozinheira"
+  },
+  {
+    "id": 5,
+    "nome": "Marcelo",
+    "email": "leitemarcelo@gmail.com",
+    "cargo": "Gerente"
+  }
+]

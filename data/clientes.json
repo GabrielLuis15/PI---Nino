@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "nome": "Eletrônicos",
+    "email": "ferlopes_123@gmail.com"
+  },
+  {
+    "id": 2,
+    "nome": "Roupas",
+    "email": "luansantos43@gmail.com"
+  },
+  {
+    "id": 4,
+    "nome": "Acessórios",
+    "email": "clovissouza73@gmail.com"
+  },
+  {
+    "id": 5,
+    "nome": "aula",
+    "email": "gabriellesoaress@gmail.com"
+  },
+  {
+    "id": 6,
+    "nome": "MELISSA",
+    "email": "melissacarvalho@gmail.com"
+  }
+]
