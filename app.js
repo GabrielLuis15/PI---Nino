@@ -1,37 +1,21 @@
 const express = require("express");
-const path = require("path");
 
 const app = express();
 
-// EJS
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-
-// FORM
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static("public"));
 
-// ROTAS
-const categoriaRoutes = require("./routes/categoriaRoutes");
-app.use("/categorias", categoriaRoutes);
+app.set("view engine", "ejs");
 
-const fornecedorRoutes = require("./routes/fornecedorRoutes");
-app.use("/fornecedores", fornecedorRoutes);
+const registroRoutes = require("./routes/registro");
 
-const clienteRoutes = require("./routes/clienteRoutes");
-app.use("/clientes", clienteRoutes);
+app.use(registroRoutes);
 
-const funcionarioRoutes = require("./routes/funcionarioRoutes");
-app.use("/funcionarios", funcionarioRoutes);
-
-// 🔥 INDEX PRINCIPAL
 app.get("/", (req, res) => {
-  res.render("index", {
-    titulo: "Página Inicial",
-  });
+    res.render("inicio");
 });
 
-// SERVER
 app.listen(3000, () => {
-  console.log("http://localhost:3000");
+    console.log("Nino rodando em http://localhost:3000");
 });

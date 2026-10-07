@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Registro emocional - Nino</title>
+
+  <!-- Fonte -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+ body {
+  min-height: 100vh;
+
+  background: linear-gradient(
+    to bottom right,
+    #E8F5E9,
+    #CBEED0,
+    #AEE3B7,
+    #9ADBA8,
+    #88D19D
+  );
+
+  font-family: 'Cinzel Decorative', serif;
+
+  padding: 30px 20px;
+}
+
+    /* =========================
+       CONTEÚDO
+    ========================= */
+
+.registro-container {
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .logo-nino {
+      width: 100px;
+      height: auto;
+      margin-bottom: 8px;
+    }
+
+    /* =========================
+       TÍTULO
+    ========================= */
+
+    h1 {
+      color: #33691E;
+      font-size: 2rem;
+      margin: 0 0 10px;
+    }
+
+    .subtitulo {
+      color: #1B5E20;
+      font-size: 1rem;
+      margin: 0 0 12px;
+    }
+
+    .data {
+      color: #558B2F;
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+
+    /* =========================
+       EMOÇÕES
+    ========================= */
+
+    .emocoes {
+      display: grid;
+
+      grid-template-columns: repeat(5, 1fr);
+
+      gap: 12px;
+
+      margin-bottom: 28px;
+    }
+
+    .emocao {
+      min-height: 105px;
+
+      border-radius: 18px;
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+
+      border: 3px solid transparent;
+    }
+
+    .emocao:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    .emocao input {
+      display: none;
+    }
+
+    .emocao span {
+      font-size: 2rem;
+      margin-bottom: 7px;
+    }
+
+    .emocao small {
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    /* =========================
+       CORES DAS EMOÇÕES
+    ========================= */
+
+    .feliz {
+      background-color: #F7C6D9;
+      color: #8E3A5B;
+    }
+
+    .calmo {
+      background-color: #e8f08288;
+      color: #336B38;
+    }
+
+    .neutro {
+      background-color: #D6D6D6;
+      color: #555555;
+    }
+
+    .triste {
+      background-color: #AFCBEF;
+      color: #315B91;
+    }
+
+    .ansioso {
+      background-color: #F5C58A;
+      color: #8A5319;
+    }
+
+    /* =========================
+       EMOÇÃO SELECIONADA
+    ========================= */
+
+    .emocao:has(input:checked) {
+      transform: translateY(-4px) scale(1.03);
+
+      border-color: currentColor;
+
+      box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    /* =========================
+       CAMPO DE TEXTO
+    ========================= */
+
+    .campo-texto {
+      text-align: left;
+
+      margin-bottom: 20px;
+    }
+
+    .campo-texto label {
+      display: block;
+
+      color: #33691E;
+
+      font-size: 0.95rem;
+
+      margin-bottom: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+
+      resize: vertical;
+
+      border: 2px solid rgba(51, 105, 30, 0.35);
+
+      border-radius: 15px;
+
+      padding: 15px;
+
+      background: rgba(255, 255, 255, 0.55);
+
+      font-family: Arial, sans-serif;
+
+      font-size: 0.95rem;
+
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #388E3C;
+
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .contador {
+      display: block;
+
+      text-align: right;
+
+      color: #689F38;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 0.8rem;
+
+      margin-top: 5px;
+    }
+
+    /* =========================
+       BOTÕES
+    ========================= */
+
+    .botoes {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      margin-top: 15px;
+    }
+
+    .btn {
+      border: none;
+
+      border-radius: 25px;
+
+      padding: 11px 28px;
+
+      font-family: 'Cinzel Decorative', serif;
+
+      font-size: 0.9rem;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .btn-salvar {
+      background-color: #1B5E20;
+      color: white;
+    }
+
+    .btn-editar {
+      background-color: #357ab3;
+      color: white;
+    }
+
+    .btn-excluir {
+      background-color: #C62828;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: scale(1.04);
+    }
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      body {
+        padding: 25px 15px;
+      }
+
+      .emocoes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .emocao:last-child {
+        grid-column: span 2;
+      }
+
+    }
+
+    @media (max-width: 450px) {
+
+      .logo-nino {
+        width: 80px;
+      }
+
+      h1 {
+        font-size: 1.55rem;
+      }
+
+      .subtitulo {
+        font-size: 0.9rem;
+      }
+
+      .emocoes {
+        gap: 8px;
+      }
+
+      .emocao {
+        min-height: 95px;
+      }
+
+      .emocao span {
+        font-size: 1.7rem;
+      }
+
+      .botoes {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+    }
+
+
+  </style>
+
+<link rel="stylesheet" href="/css/nav.css">
+
+
+</head>
+
+
+
+<body>
+
+    <%- include("partials/nav") %>
+
+  <main class="registro-container">
+
+
+    <h1>Registro emocional</h1>
+
+    <p class="subtitulo">
+      Como você está se sentindo hoje?
+    </p>
+
+    <div class="data">
+      07 de outubro de 2026
+    </div>
+
+
+    <!-- =========================
+         EMOÇÕES
+    ========================= -->
+
+    <div class="emocoes">
+
+      <label class="emocao feliz">
+
+        <input
+          type="radio"
+          name="emocao"
+          value="feliz"
+        >
+
+        <span>😊</span>
+
+        <small>Feliz</small>
+
+      </label>
+
+
+      <label class="emocao calmo">
+
+        <input
+          type="radio"
+          name="emocao"
+          value="calmo"
+        >
+
+        <span>😌</span>
+
+        <small>Calmo</small>
+
+      </label>
+
+
+      <label class="emocao neutro">
+
+        <input
+          type="radio"
+          name="emocao"
+          value="neutro"
+        >
+
+        <span>😐</span>
+
+        <small>Neutro</small>
+
+      </label>
+
+
+      <label class="emocao triste">
+
+        <input
+          type="radio"
+          name="emocao"
+          value="triste"
+        >
+
+        <span>😢</span>
+
+        <small>Triste</small>
+
+      </label>
+
+
+      <label class="emocao ansioso">
+
+        <input
+          type="radio"
+          name="emocao"
+          value="ansioso"
+        >
+
+        <span>😰</span>
+
+        <small>Ansioso</small>
+
+      </label>
+
+    </div>
+
+
+    <!-- =========================
+         TEXTO
+    ========================= -->
+
+    <div class="campo-texto">
+
+      <label for="texto">
+        Quer contar um pouco sobre seu dia?
+      </label>
+
+      <textarea
+        id="texto"
+        maxlength="1000"
+        placeholder="Escreva aqui como foi seu dia..."
+      ></textarea>
+
+      <span class="contador">
+        0 / 1000
+      </span>
+
+    </div>
+
+
+    <!-- =========================
+         BOTÕES
+    ========================= -->
+
+    <div class="botoes">
+
+      <button
+        type="button"
+        class="btn btn-salvar"
+      >
+        Salvar
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-editar"
+      >
+        Editar
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-excluir"
+      >
+        Excluir
+      </button>
+
+    </div>
+
+  </main>
+
+<script src="/js/nav.js"></script>
+
+</body>
+
+</html>
