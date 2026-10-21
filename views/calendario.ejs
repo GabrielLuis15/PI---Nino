@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário - Nino</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/calendario.css">
+</head>
+<body>
+
+    <%- include("partials/nav") %>
+
+    <main class="calendario-container">
+        <h1>Calendário emocional</h1>
+        <p class="subtitulo">Acompanhe como você se sentiu ao longo do tempo.</p>
+
+        <section class="calendario-card">
+            <div class="mes-controles">
+                <button id="mesAnterior" aria-label="Mês anterior">‹</button>
+                <div>
+                    <h2 id="mesAno"></h2>
+                    <button id="mesAtual" class="hoje-btn">Voltar para hoje</button>
+                </div>
+                <button id="proximoMes" aria-label="Próximo mês">›</button>
+            </div>
+
+            <div class="dias-semana">
+                <span>Dom</span><span>Seg</span><span>Ter</span>
+                <span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+            </div>
+
+            <div id="diasCalendario" class="dias-calendario"></div>
+
+            <div class="legenda">
+                <span><i class="cor-dot feliz"></i> Feliz</span>
+                <span><i class="cor-dot calmo"></i> Calmo</span>
+                <span><i class="cor-dot neutro"></i> Neutro</span>
+                <span><i class="cor-dot triste"></i> Triste</span>
+                <span><i class="cor-dot ansioso"></i> Ansioso</span>
+            </div>
+        </section>
+
+        <p class="instrucao">Selecione um dia para consultar ou fazer seu registro emocional.</p>
+    </main>
+
+    <script src="/js/nav.js"></script>
+    <script src="/js/calendario.js"></script>
+</body>
+</html>

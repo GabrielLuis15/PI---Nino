@@ -1,494 +1,150 @@
-import {
-    auth,
-    db,
-    entrarComoUsuarioAnonimo
-} from "../../config/firebase.js";
 
-import {
-    doc,
-    setDoc,
-    getDoc,
-    deleteDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+const campoData = document.getElementById("dataRegistro");
+const campoTexto = document.getElementById("texto");
+const contador = document.querySelector(".contador");
+const btnSalvar = document.querySelector(".btn-salvar");
+const btnEditar = document.querySelector(".btn-editar");
+const btnExcluir = document.querySelector(".btn-excluir");
+const emocoes = document.querySelectorAll('input[name="emocao"]');
 
+let registroExistente = false;
+let modoEdicao = true;
 
-/* ==========================
-   ELEMENTOS
-========================== */
+function obterUsuarioId() {
+    let id = localStorage.getItem("ninoUsuarioId");
 
-const dataAtual =
-    document.getElementById("dataAtual");
-
-const mensagem =
-    document.getElementById("mensagem");
-
-const contador =
-    document.getElementById("contador");
-
-const botoesEmocao =
-    document.querySelectorAll(".emotion");
-
-const salvarButton =
-    document.getElementById("salvarRegistro");
-
-const editarButton =
-    document.getElementById("editarRegistro");
-
-const excluirButton =
-    document.getElementById("excluirRegistro");
-
-
-/* ==========================
-   ESTADO
-========================== */
-
-let emocaoSelecionada = null;
-
-let usuario = null;
-
-
-/* ==========================
-   DATA
-========================== */
-
-function obterData() {
-
-    const agora = new Date();
-
-    const ano =
-        agora.getFullYear();
-
-    const mes =
-        String(
-            agora.getMonth() + 1
-        ).padStart(2, "0");
-
-    const dia =
-        String(
-            agora.getDate()
-        ).padStart(2, "0");
-
-    return `${ano}-${mes}-${dia}`;
-}
-
-
-function formatarData(data) {
-
-    const partes =
-        data.split("-");
-
-    return `${partes[2]}/${partes[1]}/${partes[0]}`;
-}
-
-
-const dataRegistro =
-    obterData();
-
-
-dataAtual.textContent =
-    `Hoje, ${formatarData(dataRegistro)}`;
-
-
-/* ==========================
-   EMOÇÕES
-========================== */
-
-botoesEmocao.forEach(botao => {
-
-    botao.addEventListener(
-        "click",
-        () => {
-
-            botoesEmocao.forEach(
-                outro => {
-
-                    outro.classList.remove(
-                        "selected"
-                    );
-
-                }
-            );
-
-
-            botao.classList.add(
-                "selected"
-            );
-
-
-            emocaoSelecionada = {
-
-                nome:
-                    botao.dataset.emotion,
-
-                cor:
-                    botao.dataset.color
-
-            };
-
-        }
-    );
-
-});
-
-
-/* ==========================
-   CONTADOR
-========================== */
-
-mensagem.addEventListener(
-    "input",
-    () => {
-
-        contador.textContent =
-            `${mensagem.value.length}/1000`;
-
+    if (!id) {
+        id = crypto.randomUUID();
+        localStorage.setItem("ninoUsuarioId", id);
     }
-);
 
-
-/* ==========================
-   CAMINHO DO REGISTRO
-========================== */
-
-function referenciaRegistro() {
-
-    return doc(
-        db,
-        "usuarios",
-        usuario.uid,
-        "registros",
-        dataRegistro
-    );
-
+    return id;
 }
 
+const usuarioId = obterUsuarioId();
 
-/* ==========================
-   CARREGAR REGISTRO
-========================== */
+async function requisicao(url, opcoes = {}) {
+    const resposta = await fetch(url, {
+        ...opcoes,
+        headers: {
+            "Content-Type": "application/json",
+            "x-user-id": usuarioId,
+            ...opcoes.headers
+        }
+    });
+
+    const resultado = await resposta.json();
+
+    if (!resposta.ok) {
+        throw new Error(resultado.erro || "Ocorreu um erro.");
+    }
+
+    return resultado;
+}
+
+function emocaoSelecionada() {
+    return document.querySelector('input[name="emocao"]:checked')?.value || "";
+}
+
+function definirModoEdicao(editar) {
+    modoEdicao = editar;
+
+    campoData.disabled = !editar;
+    campoTexto.readOnly = !editar;
+
+    emocoes.forEach(input => {
+        input.disabled = !editar;
+    });
+
+    btnSalvar.hidden = !editar;
+    btnEditar.hidden = !registroExistente || editar;
+    btnExcluir.hidden = !registroExistente || editar;
+
+    atualizarContador();
+}
+
+function atualizarContador() {
+    contador.textContent = `${campoTexto.value.length} / 1000`;
+}
 
 async function carregarRegistro() {
+    if (!campoData.value) return;
 
     try {
-
-        const referencia =
-            referenciaRegistro();
-
-
-        const resultado =
-            await getDoc(referencia);
-
-
-        if (!resultado.exists()) {
-
-            return;
-
-        }
-
-
-        const registro =
-            resultado.data();
-
-
-        mensagem.value =
-            registro.mensagem || "";
-
-
-        contador.textContent =
-            `${mensagem.value.length}/1000`;
-
-
-        botoesEmocao.forEach(
-            botao => {
-
-                if (
-                    botao.dataset.emotion ===
-                    registro.emocao
-                ) {
-
-                    botao.classList.add(
-                        "selected"
-                    );
-
-
-                    emocaoSelecionada = {
-
-                        nome:
-                            registro.emocao,
-
-                        cor:
-                            registro.cor
-
-                    };
-
-                }
-
-            }
+        const registro = await requisicao(
+            `/api/registros/${campoData.value}`
         );
 
+        registroExistente = Boolean(registro);
 
-        salvarButton.textContent =
-            "💾 Atualizar registro";
+        emocoes.forEach(input => {
+            input.checked = registro?.emocao === input.value;
+        });
 
+        campoTexto.value = registro?.texto || "";
 
-        editarButton.hidden =
-            false;
+        atualizarContador();
 
-
-        excluirButton.hidden =
-            false;
-
-
+        // Registro existente abre para consulta.
+        // Data sem registro abre pronta para preencher.
+        definirModoEdicao(!registroExistente);
     } catch (erro) {
-
-        console.error(
-            "Erro ao carregar registro:",
-            erro
-        );
-
-        alert(
-            "Não foi possível carregar seu registro."
-        );
-
+        alert(erro.message);
     }
-
 }
 
+campoData.addEventListener("change", carregarRegistro);
+campoTexto.addEventListener("input", atualizarContador);
 
-/* ==========================
-   SALVAR
-========================== */
+btnEditar.addEventListener("click", () => {
+    definirModoEdicao(true);
+});
 
-async function salvarRegistro() {
+btnSalvar.addEventListener("click", async () => {
+    if (!modoEdicao) return;
 
-    if (!emocaoSelecionada) {
+    const emocao = emocaoSelecionada();
 
-        alert(
-            "Escolha uma emoção antes de salvar."
-        );
-
+    if (!campoData.value) {
+        alert("Selecione uma data.");
         return;
-
     }
 
-
-    try {
-
-        salvarButton.disabled = true;
-
-        salvarButton.textContent =
-            "Salvando...";
-
-
-        await setDoc(
-            referenciaRegistro(),
-            {
-
-                data:
-                    dataRegistro,
-
-                emocao:
-                    emocaoSelecionada.nome,
-
-                cor:
-                    emocaoSelecionada.cor,
-
-                mensagem:
-                    mensagem.value.trim(),
-
-                atualizadoEm:
-                    serverTimestamp()
-
-            },
-            {
-                merge: true
-            }
-        );
-
-
-        alert(
-            "Registro salvo com sucesso! 💚"
-        );
-
-
-        editarButton.hidden =
-            false;
-
-
-        excluirButton.hidden =
-            false;
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao salvar:",
-            erro
-        );
-
-
-        alert(
-            "Não foi possível salvar o registro."
-        );
-
-
-    } finally {
-
-        salvarButton.disabled =
-            false;
-
-        salvarButton.textContent =
-            "💾 Atualizar registro";
-
-    }
-
-}
-
-
-/* ==========================
-   EXCLUIR
-========================== */
-
-async function excluirRegistro() {
-
-    const confirmar =
-        confirm(
-            "Deseja realmente excluir seu registro de hoje?"
-        );
-
-
-    if (!confirmar) {
-
+    if (!emocao) {
+        alert("Selecione uma emoção.");
         return;
-
     }
-
 
     try {
+        await requisicao(`/api/registros/${campoData.value}`, {
+            method: "POST",
+            body: JSON.stringify({
+                emocao,
+                texto: campoTexto.value
+            })
+        });
 
-        await deleteDoc(
-            referenciaRegistro()
-        );
-
-
-        mensagem.value = "";
-
-        contador.textContent =
-            "0/1000";
-
-
-        emocaoSelecionada =
-            null;
-
-
-        botoesEmocao.forEach(
-            botao => {
-
-                botao.classList.remove(
-                    "selected"
-                );
-
-            }
-        );
-
-
-        salvarButton.textContent =
-            "♡ Salvar registro";
-
-
-        editarButton.hidden =
-            true;
-
-
-        excluirButton.hidden =
-            true;
-
-
-        alert(
-            "Registro excluído."
-        );
-
-
+        window.location.href = "/calendario";
     } catch (erro) {
-
-        console.error(
-            "Erro ao excluir:",
-            erro
-        );
-
-
-        alert(
-            "Não foi possível excluir o registro."
-        );
-
+        alert(erro.message);
     }
+});
 
-}
+btnExcluir.addEventListener("click", async () => {
+    if (!registroExistente) return;
 
-
-/* ==========================
-   EVENTOS
-========================== */
-
-salvarButton.addEventListener(
-    "click",
-    salvarRegistro
-);
-
-
-excluirButton.addEventListener(
-    "click",
-    excluirRegistro
-);
-
-
-editarButton.addEventListener(
-    "click",
-    () => {
-
-        mensagem.focus();
-
-    }
-);
-
-
-/* ==========================
-   INICIALIZAÇÃO
-========================== */
-
-async function iniciar() {
+    if (!confirm("Deseja excluir o registro deste dia?")) return;
 
     try {
+        await requisicao(`/api/registros/${campoData.value}`, {
+            method: "DELETE"
+        });
 
-        usuario =
-            await entrarComoUsuarioAnonimo();
-
-
-        console.log(
-            "Usuário Firebase:",
-            usuario.uid
-        );
-
-
-        await carregarRegistro();
-
-
+        window.location.href = "/calendario";
     } catch (erro) {
-
-        console.error(
-            "Erro ao iniciar Nino:",
-            erro
-        );
-
-
-        alert(
-            "Não foi possível conectar ao Nino."
-        );
-
+        alert(erro.message);
     }
+});
 
-}
-
-
-iniciar();
+atualizarContador();
+carregarRegistro();

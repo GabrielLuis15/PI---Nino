@@ -1,0 +1,219 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 25px 18px;
+    background: linear-gradient(to bottom right, #E8F5E9, #CBEED0, #AEE3B7, #9ADBA8, #88D19D);
+    font-family: 'Cinzel Decorative', serif;
+    color: #33691E;
+}
+
+.calendario-container {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.calendario-container h1 {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    margin: 12px 0;
+}
+
+.subtitulo, .instrucao {
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.calendario-card {
+    margin: 28px auto 18px;
+    padding: clamp(15px, 4vw, 28px);
+    background: rgba(255, 255, 255, 0.42);
+    border: 1px solid rgba(51, 105, 30, 0.16);
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(51, 105, 30, 0.10);
+}
+
+.mes-controles {
+    display: grid;
+    grid-template-columns: 45px 1fr 45px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.mes-controles > button {
+    border: none;
+    background: #1B5E20;
+    color: white;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    justify-self: center;
+}
+
+.mes-controles h2 {
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    margin: 0 0 8px;
+    text-transform: capitalize;
+}
+
+.hoje-btn {
+    border: 1px solid #388E3C;
+    background: transparent;
+    color: #1B5E20;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.dias-semana, .dias-calendario {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.dias-semana {
+    margin-bottom: 10px;
+}
+
+.dias-semana span {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+    padding: 8px 0;
+    color: #558B2F;
+}
+
+.dia {
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    border: 1px solid rgba(51, 105, 30, 0.14);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.52);
+    color: #33691E;
+    font-family: Arial, sans-serif;
+    font-size: clamp(0.8rem, 2.8vw, 1rem);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.dia:hover {
+    background: #E8F5E9;
+    border-color: #66BB6A;
+    transform: translateY(-2px);
+}
+
+.dia.vazio {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.dia.hoje {
+    border: 2px solid #1B5E20;
+    font-weight: bold;
+}
+
+.dia.selecionado {
+    box-shadow: inset 0 0 0 2px #558B2F;
+}
+
+.emocao-dot, .cor-dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.emocao-dot {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.feliz { background-color: #E77FA8; }
+.calmo { background-color: #8BCB75; }
+.neutro { background-color: #888888; }
+.triste { background-color: #6495D8; }
+.ansioso { background-color: #E99B3D; }
+
+.legenda {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 18px;
+    margin-top: 25px;
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+}
+
+.legenda span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.instrucao {
+    margin: 20px auto;
+}
+
+@media (max-width: 450px) {
+    body {
+        padding: 18px 10px;
+    }
+
+    .calendario-card {
+        padding: 12px 8px;
+        border-radius: 18px;
+    }
+
+    .dias-semana, .dias-calendario {
+        gap: 4px;
+    }
+
+    .dia {
+        border-radius: 9px;
+    }
+
+    .emocao-dot {
+        width: 7px;
+        height: 7px;
+        bottom: 4px;
+    }
+
+    .legenda {
+        gap: 10px;
+        font-size: 0.72rem;
+    }
+
+.dia {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.emocao-dot {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+}

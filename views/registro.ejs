@@ -372,10 +372,15 @@
       Como você está se sentindo hoje?
     </p>
 
-    <div class="data">
-      07 de outubro de 2026
-    </div>
-
+   <div class="data">
+    <label for="dataRegistro">Data do registro</label>
+    <input
+        type="date"
+        id="dataRegistro"
+        value="<%= dataSelecionada %>"
+        required
+    >
+</div>
 
     <!-- =========================
          EMOÇÕES
@@ -487,34 +492,35 @@
          BOTÕES
     ========================= -->
 
-    <div class="botoes">
-
-      <button
+   <div class="botoes">
+    <button
         type="button"
         class="btn btn-salvar"
-      >
+    >
         Salvar
-      </button>
+    </button>
 
-      <button
+    <button
         type="button"
         class="btn btn-editar"
-      >
+        hidden
+    >
         Editar
-      </button>
+    </button>
 
-      <button
+    <button
         type="button"
         class="btn btn-excluir"
-      >
+        hidden
+    >
         Excluir
-      </button>
-
-    </div>
+    </button>
+</div>
 
   </main>
 
 <script src="/js/nav.js"></script>
+<script src="/js/registro.js"></script>
 
 </body>
 
