@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Espaço de conforto - Nino</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/conforto.css">
+</head>
+
+<body>
+  <%- include("partials/nav") %>
+
+<main class="conforto-container">
+  <section class="conforto-intro">
+    <span class="conforto-etiqueta">SEU MOMENTO DE PAZ</span>
+    <h1>Espaço de conforto</h1>
+    <p>Você não precisa resolver tudo agora. Respire e fique um pouco aqui.</p>
+  </section>
+
+  <section class="som-section" aria-labelledby="tituloSom">
+    <h2 id="tituloSom">Sons para relaxar</h2>
+    <p>Escolha um som para acompanhar seu momento.</p>
+
+    <button type="button" id="btnSom" class="btn-nino btn-som">
+      <span id="iconeSom" aria-hidden="true">🔇</span>
+      <span id="textoBotaoSom">Ativar som ambiente</span>
+    </button>
+
+    <p id="somStatus" class="som-status" aria-live="polite">
+      Silêncio ativado
+    </p>
+  </section>
+
+  <div class="linha-decorativa"></div>
+
+  <section class="respiracao-section" aria-labelledby="tituloRespiracao">
+    <span class="conforto-etiqueta">VAMOS COM CALMA</span>
+    <h2 id="tituloRespiracao">Se acalme com o Nino</h2>
+    <p class="descricao-respiracao">
+      Acompanhe o movimento da bolinha. Inspire quando ela crescer e expire
+      quando ela diminuir.
+    </p>
+
+    <div class="respiracao-palco">
+      <div id="circuloRespiracao" class="circulo-respiracao">
+        <div class="circulo-interno">
+          <span id="iconeRespiracao" aria-hidden="true">🌿</span>
+          <span id="textoCirculo">PAUSA</span>
+        </div>
+      </div>
+    </div>
+
+    <p id="fraseRespiracao" class="frase-respiracao" aria-live="polite">
+      Quando quiser, podemos respirar juntos.
+    </p>
+
+    <button type="button" id="btnRespirar" class="btn-nino btn-principal">
+      Começar respiração
+    </button>
+  </section>
+
+  <div class="linha-decorativa"></div>
+
+  <section class="emocao-section" aria-labelledby="tituloEmocao">
+    <span class="conforto-etiqueta">COMO VOCÊ ESTÁ?</span>
+    <h2 id="tituloEmocao">Um espaço para o que você sente</h2>
+    <p>Escolha a emoção que mais combina com seu momento.</p>
+
+    <div class="emocoes-grid">
+      <button type="button" class="emocao-opcao feliz" data-emocao="feliz" aria-pressed="false">
+        <span>😊</span>
+        <span>Feliz</span>
+      </button>
+
+      <button type="button" class="emocao-opcao calmo" data-emocao="calmo" aria-pressed="false">
+        <span>😌</span>
+        <span>Calmo</span>
+      </button>
+
+      <button type="button" class="emocao-opcao neutro" data-emocao="neutro" aria-pressed="false">
+        <span>😐</span>
+        <span>Neutro</span>
+      </button>
+
+      <button type="button" class="emocao-opcao triste" data-emocao="triste" aria-pressed="false">
+        <span>🥹</span>
+        <span>Triste</span>
+      </button>
+
+      <button type="button" class="emocao-opcao ansioso" data-emocao="ansioso" aria-pressed="false">
+        <span>😰</span>
+        <span>Ansioso</span>
+      </button>
+    </div>
+
+    <div id="mensagemEmocao" class="mensagem-emocao" aria-live="polite">
+      <span class="mensagem-icone" id="iconeMensagem">💚</span>
+      <p id="textoMensagem">
+        Seja qual for o seu sentimento, você merece acolhimento.
+      </p>
+    </div>
+
+    <a href="/registro" class="btn-nino btn-principal btn-registro">
+      Registrar como estou me sentindo
+      <span aria-hidden="true">→</span>
+    </a>
+  </section>
+</main>
+
+<audio id="audioChuva" src="/sons/chuva.mp3" loop preload="none"></audio>
+<audio id="audioMar" src="/sons/mar.mp3" loop preload="none"></audio>
+
+
+<script src="/js/nav.js"></script>
+<script src="/js/conforto.js"></script>
+
+</body>
+</html>
