@@ -80,6 +80,8 @@
   transition: right 0.3s ease;
 
   padding: 25px 20px;
+
+   font-family: "Cinzel Decorative", serif;
 }
 
 .menu-lateral.aberto {
@@ -113,6 +115,8 @@
   font-size: 2rem;
   cursor: pointer;
   line-height: 1;
+
+   font-family: Arial, sans-serif;
 }
 
 .menu-opcoes {
@@ -130,6 +134,7 @@
 
   color: #33691E;
   text-decoration: none;
+   font-family: "Cinzel Decorative", serif;
 
   border-radius: 12px;
 

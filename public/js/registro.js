@@ -1,4 +1,8 @@
 
+import { auth } from "/firebase-config.js";
+
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
 const campoData = document.getElementById("dataRegistro");
 const campoTexto = document.getElementById("texto");
 const contador = document.querySelector(".contador");
@@ -9,37 +13,34 @@ const emocoes = document.querySelectorAll('input[name="emocao"]');
 
 let registroExistente = false;
 let modoEdicao = true;
+let usuarioAtual = null;
+let carregando = false;
 
-function obterUsuarioId() {
-    let id = localStorage.getItem("ninoUsuarioId");
-
-    if (!id) {
-        id = crypto.randomUUID();
-        localStorage.setItem("ninoUsuarioId", id);
-    }
-
-    return id;
-}
-
-const usuarioId = obterUsuarioId();
-
-async function requisicao(url, opcoes = {}) {
-    const resposta = await fetch(url, {
-        ...opcoes,
-        headers: {
-            "Content-Type": "application/json",
-            "x-user-id": usuarioId,
-            ...opcoes.headers
+function requisicao(url, opcoes = {}) {
+    return (async () => {
+        if (!usuarioAtual) {
+            throw new Error("Entre na sua conta para continuar.");
         }
-    });
 
-    const resultado = await resposta.json();
+        const token = await usuarioAtual.getIdToken();
 
-    if (!resposta.ok) {
-        throw new Error(resultado.erro || "Ocorreu um erro.");
-    }
+        const resposta = await fetch(url, {
+            ...opcoes,
+            headers: {
+                "Content-Type": "application/json",
+                ...opcoes.headers,
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
-    return resultado;
+        const resultado = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(resultado.erro || "Ocorreu um erro.");
+        }
+
+        return resultado;
+    })();
 }
 
 function emocaoSelecionada() {
@@ -68,7 +69,9 @@ function atualizarContador() {
 }
 
 async function carregarRegistro() {
-    if (!campoData.value) return;
+    if (!campoData.value || carregando) return;
+
+    carregando = true;
 
     try {
         const registro = await requisicao(
@@ -84,12 +87,11 @@ async function carregarRegistro() {
         campoTexto.value = registro?.texto || "";
 
         atualizarContador();
-
-        // Registro existente abre para consulta.
-        // Data sem registro abre pronta para preencher.
         definirModoEdicao(!registroExistente);
     } catch (erro) {
         alert(erro.message);
+    } finally {
+        carregando = false;
     }
 }
 
@@ -147,4 +149,13 @@ btnExcluir.addEventListener("click", async () => {
 });
 
 atualizarContador();
-carregarRegistro();
+
+onAuthStateChanged(auth, usuario => {
+    if (!usuario) {
+        window.location.replace("/login");
+        return;
+    }
+
+    usuarioAtual = usuario;
+    carregarRegistro();
+});

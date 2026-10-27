@@ -10,10 +10,8 @@ body {
     width: 100%;
     min-height: 100%;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: 'Cinzel Decorative', serif;
+    color: #33691E;
 
         background: linear-gradient(
   to bottom right,
@@ -22,6 +20,7 @@ body {
   #AEE3B7,
   #9ADBA8,
   #88D19D
+  
 );
 }
 

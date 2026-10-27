@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Membros - Nino</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/membros.css">
+
+    <script src="/js/nav.js" defer></script>
+</head>
+<body>
+
+    <%- include("partials/nav") %>
+
+<header class="cabecalho-membros">
+    <h1>Membros</h1>
+    <p>Conheça quem está com você nessa jornada</p>
+</header>
+
+        <section class="lista-membros" aria-label="Integrantes do projeto">
+            <% membros.forEach(membro => { %>
+                <article class="membro">
+
+                    <div class="area-mascote">
+                        <img
+                            src="<%= membro.mascote %>"
+                            alt="Mascote de <%= membro.nome %>"
+                            class="imagem-mascote"
+                        >
+                    </div>
+
+                    <div class="informacoes-membro">
+                        <h2><%= membro.nome %></h2>
+                        <p><%= membro.funcao %></p>
+                    </div>
+
+                    <div class="area-foto">
+                        <img
+                            src="<%= membro.foto %>"
+                            alt="Foto de <%= membro.nome %>"
+                            class="foto-real"
+                        >
+                    </div>
+
+                </article>
+            <% }); %>
+        </section>
+    </main>
+
+</body>
+</html>

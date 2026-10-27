@@ -1,3 +1,8 @@
+
+import { auth } from "/firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+
 const mesAno = document.getElementById("mesAno");
 const diasCalendario = document.getElementById("diasCalendario");
 const mesAnterior = document.getElementById("mesAnterior");
@@ -14,18 +19,7 @@ const nomesMeses = [
     "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
-function obterUsuarioId() {
-    let id = localStorage.getItem("ninoUsuarioId");
 
-    if (!id) {
-        id = crypto.randomUUID();
-        localStorage.setItem("ninoUsuarioId", id);
-    }
-
-    return id;
-}
-
-const usuarioId = obterUsuarioId();
 
 const coresEmocoes = {
     feliz: "#F7C6D9",
@@ -43,19 +37,30 @@ function abrirRegistro(data) {
     window.location.href = `/registro?data=${data}`;
 }
 
+
 async function buscarRegistros(mes) {
+    const usuario = auth.currentUser;
+
+    if (!usuario) {
+        throw new Error("Você precisa entrar na sua conta.");
+    }
+
+    const token = await usuario.getIdToken();
+
     const resposta = await fetch(`/api/registros?mes=${mes}`, {
         headers: {
-            "x-user-id": usuarioId
+            "Authorization": `Bearer ${token}`
         }
     });
 
     if (!resposta.ok) {
-        throw new Error("Não foi possível carregar os registros.");
+        const resultado = await resposta.json();
+        throw new Error(resultado.erro || "Não foi possível carregar os registros.");
     }
 
     return resposta.json();
 }
+
 
 async function renderizarCalendario() {
     mesAno.textContent = `${nomesMeses[mesExibido]} de ${anoExibido}`;
@@ -144,4 +149,11 @@ mesAtual.addEventListener("click", () => {
     renderizarCalendario();
 });
 
-renderizarCalendario();
+onAuthStateChanged(auth, (usuario) => {
+    if (!usuario) {
+        window.location.replace("/login");
+        return;
+    }
+
+    renderizarCalendario();
+});

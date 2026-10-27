@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar conta - Nino</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; padding: 20px;
+      display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(to bottom right,#E8F5E9,#CBEED0,#AEE3B7,#9ADBA8,#88D19D);
+      font-family: Arial, sans-serif; color: #1B5E20;
+    }
+    .container {
+      width: 100%; max-width: 400px; text-align: center;
+    }
+    h1 { font-family: 'Cinzel Decorative',serif; }
+    p { margin-bottom: 25px; }
+    input {
+      width: 100%; padding: 13px; margin: 8px 0;
+      border: 1px solid #81C784; border-radius: 12px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%; padding: 13px; margin-top: 15px;
+      border: none; border-radius: 25px;
+      background: #1B5E20; color: white;
+      font-size: 16px; cursor: pointer;
+    }
+    a { color: #1B5E20; }
+    #mensagem { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Criar conta</h1>
+    <p>Comece seu momento de cuidado com o Nino.</p>
+
+    <form id="formCadastro">
+      <input id="nome" type="text" placeholder="Seu nome" autocomplete="name" required maxlength="100">
+      <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email" required>
+      <input id="senha" type="password" placeholder="Crie uma senha (mínimo 6 caracteres)" autocomplete="new-password" minlength="6" required>
+      <button type="submit">Criar minha conta</button>
+    </form>
+
+    <p id="mensagem" role="status"></p>
+    <p>Já tem uma conta? <a href="/login">Entrar</a></p>
+    <a href="/">Voltar ao início</a>
+  </main>
+
+  <script type="module" src="/js/cadastro.js"></script>
+</body>
+</html>

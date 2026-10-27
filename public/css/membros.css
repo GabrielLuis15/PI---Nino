@@ -1,0 +1,154 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(
+        to bottom right,
+        #E8F5E9,
+        #CBEED0,
+        #AEE3B7,
+        #9ADBA8,
+        #88D19D
+    );
+     font-family: 'Cinzel Decorative', serif;
+     color: #59635b;
+}
+
+.pagina-membros {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 8px 20px 30px;
+}
+
+.lista-membros {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.cabecalho-membros {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.logo-membros {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.cabecalho-membros h1 {
+    margin: 2px 0;
+    font-family: "Cinzel Decorative", serif;
+    font-size: 1.8rem;
+    color: #33691E;
+}
+
+.cabecalho-membros p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #33691E;
+}
+
+.membro {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) 64px;
+    align-items: center;
+    gap: 8px;
+    min-height: 60px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 13px;
+    width: 100%;
+    padding: 6px 10px;
+}
+
+.area-mascote,
+.area-foto {
+    width: 64px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.imagem-mascote {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.area-foto {
+    background: #eef3e9;
+    border-radius: 9px;
+}
+
+.foto-real {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 9px;
+}
+
+.informacoes-membro {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+}
+
+.informacoes-membro h2,
+.informacoes-membro p {
+    margin: 0;
+    padding: 4px 3px;
+    background: #f4f3f1;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+}
+
+.informacoes-membro h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.informacoes-membro p {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+@media (max-width: 360px) {
+    .pagina-membros {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    .membro {
+        grid-template-columns: 52px minmax(0, 1fr) 52px;
+        gap: 5px;
+        padding: 6px;
+    }
+
+    .area-mascote,
+    .area-foto {
+        width: 52px;
+        height: 44px;
+    }
+
+    .informacoes-membro h2 {
+        font-size: 0.75rem;
+    }
+
+    .informacoes-membro p {
+        font-size: 0.72rem;
+    }
+}

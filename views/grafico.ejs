@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Seu estado emocional - Nino</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/grafico.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script type="module" src="/js/grafico.js"></script>
+    <script src="/js/nav.js" defer></script>
+</head>
+<body>
+    <%- include("partials/nav") %>
+
+    <main class="pagina-grafico">
+        <header class="cabecalho-grafico">
+            <h1>Seu estado emocional</h1>
+            <p>O que você sentiu até aqui?</p>
+        </header>
+
+        <nav class="filtros" aria-label="Período do gráfico">
+            <button class="filtro ativo" data-periodo="semana">Semana</button>
+            <button class="filtro" data-periodo="mes">Mês</button>
+            <button class="filtro" data-periodo="seisMeses">6 meses</button>
+            <button class="filtro" data-periodo="ano">Ano</button>
+        </nav>
+
+        <p id="mensagem" role="status" aria-live="polite"></p>
+
+        <section class="cartao grafico-cartao">
+            <div class="area-grafico">
+                <canvas id="graficoEmocional"
+                    role="img"
+                    aria-label="Gráfico dos registros emocionais">
+                </canvas>
+            </div>
+        </section>
+
+        <section class="cartao resumo" aria-live="polite">
+            <h2>Emoção mais sentida: <span id="emocaoPrincipal">—</span></h2>
+            <p>📈 Total de registros: <strong id="totalRegistros">0</strong></p>
+        </section>
+
+        <section class="cartao reflexao">
+            <h2 id="tituloReflexao">Reflexão da semana</h2>
+            <p id="textoReflexao">
+                Seus sentimentos merecem atenção e acolhimento.
+                Continue observando suas emoções com gentileza.
+            </p>
+        </section>
+    </main>
+</body>
+</html>

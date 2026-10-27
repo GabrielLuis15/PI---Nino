@@ -1,5 +1,7 @@
+
 const { initializeApp, cert, getApps } = require("firebase-admin/app");
 const { getFirestore } = require("firebase-admin/firestore");
+const { getAuth } = require("firebase-admin/auth");
 
 const serviceAccount = require("../firebaseServiceAccountKey.json");
 
@@ -10,5 +12,6 @@ if (getApps().length === 0) {
 }
 
 const db = getFirestore();
+const auth = getAuth();
 
-module.exports = db;
+module.exports = { db, auth };

@@ -14,11 +14,24 @@ app.set("view engine", "ejs");
 const registroRoutes = require("./routes/registro");
 const calendarioRoutes = require("./routes/calendario");
 const confortoRoutes = require("./routes/conforto");
+const graficoRoutes = require("./routes/grafico");
+const membrosRoutes = require("./routes/membros");
 
-// Registro das rotas
+// Rotas de autenticação
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+
+app.get("/cadastro", (req, res) => {
+    res.render("cadastro");
+});
+
+// Registro das rotas existentes
 app.use(registroRoutes);
 app.use(calendarioRoutes);
 app.use("/conforto", confortoRoutes);
+app.use(graficoRoutes);
+app.use(membrosRoutes);
 
 // Página inicial
 app.get("/", (req, res) => {

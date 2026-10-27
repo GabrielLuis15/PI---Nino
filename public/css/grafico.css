@@ -1,0 +1,138 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px 16px 35px;
+    background: linear-gradient(
+        to bottom right,
+        #E8F5E9,
+        #CBEED0,
+        #AEE3B7,
+        #9ADBA8,
+        #88D19D
+    );
+    font-family: 'Cinzel Decorative', serif;
+    color: #33691E;
+}
+
+.pagina-grafico {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.cabecalho-grafico {
+    text-align: center;
+    margin: 15px 0 20px;
+}
+
+.cabecalho-grafico h1 {
+    font-size: clamp(22px, 5vw, 29px);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.cabecalho-grafico p {
+    font-size: 13px;
+    margin: 0;
+}
+
+.filtros {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 15px;
+}
+
+.filtro {
+    border: 0;
+    border-radius: 20px;
+    padding: 9px 13px;
+    background: #edf2e9;
+    color: #505750;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.filtro.ativo {
+    background: #347849;
+    color: white;
+}
+
+.cartao {
+    background: #f1eded;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 17px;
+    box-shadow: 0 3px 10px #00000008;
+}
+
+.area-grafico {
+    position: relative;
+    width: 100%;
+    height: 280px;
+}
+
+.resumo {
+    text-align: center;
+}
+
+.resumo h2,
+.reflexao h2 {
+    font-size: clamp(16px, 4vw, 19px);
+    margin: 0 0 16px;
+}
+
+.resumo p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.reflexao {
+    text-align: center;
+}
+
+.reflexao p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+#mensagem {
+    text-align: center;
+    font-size: 13px;
+}
+
+#mensagem:empty {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px 10px 25px;
+    }
+
+    .cabecalho-grafico {
+        margin-top: 12px;
+    }
+
+    .cartao {
+        padding: 17px 13px;
+        border-radius: 18px;
+    }
+
+    .area-grafico {
+        height: 250px;
+    }
+
+    .filtro {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+}
