@@ -16,6 +16,8 @@ const calendarioRoutes = require("./routes/calendario");
 const confortoRoutes = require("./routes/conforto");
 const graficoRoutes = require("./routes/grafico");
 const membrosRoutes = require("./routes/membros");
+const mascoteRoutes = require("./routes/mascote");
+
 
 // Rotas de autenticação
 app.get("/login", (req, res) => {
@@ -26,12 +28,17 @@ app.get("/cadastro", (req, res) => {
     res.render("cadastro");
 });
 
+app.get("/mascote", (req, res) => {
+    res.render("mascote");
+});
+
 // Registro das rotas existentes
 app.use(registroRoutes);
 app.use(calendarioRoutes);
 app.use("/conforto", confortoRoutes);
 app.use(graficoRoutes);
 app.use(membrosRoutes);
+app.use(mascoteRoutes);
 
 // Página inicial
 app.get("/", (req, res) => {

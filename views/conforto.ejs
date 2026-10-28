@@ -25,19 +25,31 @@
     <p>Você não precisa resolver tudo agora. Respire e fique um pouco aqui.</p>
   </section>
 
-  <section class="som-section" aria-labelledby="tituloSom">
-    <h2 id="tituloSom">Sons para relaxar</h2>
-    <p>Escolha um som para acompanhar seu momento.</p>
+ 
+<div class="som-layout">
+    <section class="som-section" aria-labelledby="tituloSom">
+        <h2 id="tituloSom">Sons para relaxar</h2>
+        <p>Escolha um som para acompanhar seu momento.</p>
 
-    <button type="button" id="btnSom" class="btn-nino btn-som">
-      <span id="iconeSom" aria-hidden="true">🔇</span>
-      <span id="textoBotaoSom">Ativar som ambiente</span>
-    </button>
+        <button type="button" id="btnSom" class="btn-nino btn-som">
+            <span id="iconeSom" aria-hidden="true">🔇</span>
+            <span id="textoBotaoSom">Ativar som ambiente</span>
+        </button>
 
-    <p id="somStatus" class="som-status" aria-live="polite">
-      Silêncio ativado
-    </p>
-  </section>
+        <p id="somStatus" class="som-status" aria-live="polite">
+            Silêncio ativado
+        </p>
+    </section>
+
+    <aside id="mascoteConforto" class="mascote-conforto" hidden>
+        <img id="fotoMascoteConforto" src="" alt="">
+        <div class="fala-mascote">
+            <span class="fala-etiqueta">UMA PALAVRA DO SEU NINO</span>
+            <p id="fraseMascoteConforto"></p>
+        </div>
+    </aside>
+</div>
+
 
   <div class="linha-decorativa"></div>
 
@@ -113,10 +125,121 @@
       <span aria-hidden="true">→</span>
     </a>
   </section>
+
+ <div class="linha-decorativa"></div>
+
+  <section class="cvv-section" aria-labelledby="tituloCVV">
+    <span class="conforto-etiqueta">VOCÊ NÃO ESTÁ SOZINHO</span>
+
+    <h2 id="tituloCVV">Precisa conversar com alguém?</h2>
+
+    <p>
+      Se estiver passando por um momento difícil, você pode conversar
+      com alguém que vai ouvir você com atenção e sem julgamentos.
+    </p>
+
+    <a
+      href="https://cvv.org.br/"
+      class="btn-nino btn-cvv"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Conversar com o CVV
+      <span aria-hidden="true">↗</span>
+    </a>
+
+    <p class="cvv-telefone">
+      Centro de Valorização da Vida — telefone 188,
+      ligação gratuita, 24 horas por dia.
+    </p>
+  </section>
+
+
 </main>
 
 <audio id="audioChuva" src="/sons/chuva.mp3" loop preload="none"></audio>
 <audio id="audioMar" src="/sons/mar.mp3" loop preload="none"></audio>
+
+
+<script>
+(() => {
+    const chave = "ninoMascoteDados";
+
+    const mascotes = {
+        "1": {
+            nome: "LEZZI",
+            foto: "/imagesNino/mascotes/lezzi.png",
+            frase: "Você merece carinho, acolhimento e momentos de alegria. 💚"
+        },
+        "2": {
+            nome: "BILU",
+            foto: "/imagesNino/mascotes/bilu.png",
+            frase: "Respeite seu tempo. Você não precisa ter todas as respostas agora. 🌿"
+        },
+        "3": {
+            nome: "TATA",
+            foto: "/imagesNino/mascotes/tata.png",
+            frase: "Mesmo nos dias difíceis, você pode encontrar forças para continuar. ✨"
+        },
+        "4": {
+            nome: "VIT",
+            foto: "/imagesNino/mascotes/vit.png",
+            frase: "Todos os seus sentimentos importam. Você merece ser ouvido. 💙"
+        },
+        "5": {
+            nome: "YAMA",
+            foto: "/imagesNino/mascotes/yama.png",
+            frase: "Vá no seu ritmo. Cada pequeno passo também é uma conquista. 🌱"
+        },
+        "6": {
+            nome: "VICKIE",
+            foto: "/imagesNino/mascotes/vickie.png",
+            frase: "Você também merece descansar e receber o carinho que oferece. 💜"
+        }
+    };
+
+    const area = document.getElementById("mascoteConforto");
+    const foto = document.getElementById("fotoMascoteConforto");
+    const frase = document.getElementById("fraseMascoteConforto");
+
+    function atualizarMascote() {
+        let dados;
+
+        try {
+            dados = JSON.parse(localStorage.getItem(chave) || "null");
+        } catch {
+            dados = null;
+        }
+
+        const mascote = dados?.ninoId
+            ? mascotes[String(dados.ninoId)]
+            : null;
+
+        if (!mascote) {
+            area.hidden = true;
+            foto.removeAttribute("src");
+            return;
+        }
+
+        foto.src = mascote.foto;
+        foto.alt = mascote.nome;
+        frase.textContent = mascote.frase;
+        area.hidden = false;
+    }
+
+    atualizarMascote();
+
+    // Atualiza se a seleção mudar em outra aba.
+    window.addEventListener("storage", event => {
+        if (event.key === chave || event.key === null) {
+            atualizarMascote();
+        }
+    });
+
+    // Permite atualizar também na mesma aba, caso a seleção mude.
+    window.addEventListener("ninoMascoteAtualizado", atualizarMascote);
+})();
+</script>
 
 
 <script src="/js/nav.js"></script>

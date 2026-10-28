@@ -1,0 +1,556 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(
+        to bottom right,
+        #E8F5E9,
+        #CBEED0,
+        #AEE3B7,
+        #9ADBA8,
+        #88D19D
+    );
+    color: #254C30;
+    font-family: Arial, sans-serif;
+}
+
+.mascote-container {
+    width: min(1100px, 94%);
+    margin: 0 auto;
+    padding: 35px 0 60px;
+}
+
+.mascote-intro {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.etiqueta {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: #477A51;
+}
+
+.mascote-intro h1 {
+    font-family: "Cinzel Decorative", serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 12px 0;
+    color: #245B32;
+}
+
+.mascote-intro p,
+.descricao-secao {
+    line-height: 1.7;
+    color: #42664A;
+}
+
+.secao-ninos > h2,
+.secao-mural > h2,
+.meu-nino > h2 {
+    font-family: "Cinzel Decorative", serif;
+    text-align: center;
+    color: #245B32;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+}
+
+.descricao-secao {
+    text-align: center;
+    max-width: 680px;
+    margin: 12px auto 28px;
+}
+
+.lista-ninos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.card-nino {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 16px;
+    border: 1px solid rgba(39, 99, 51, 0.18);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.17);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.card-nino:hover {
+    transform: translateY(-4px);
+}
+
+.card-nino.selecionado {
+    border: 2px solid #27743B;
+    background: rgba(255, 255, 255, 0.34);
+}
+
+.foto-nino {
+    width: 100%;
+    height: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.foto-nino img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.card-nino h3,
+.meu-nino h3 {
+    color: #245B32;
+    letter-spacing: 1px;
+    margin: 14px 0 8px;
+}
+
+.card-nino p {
+    flex: 1;
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: #42664A;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+.btn-escolher,
+.btn-principal,
+.btn-secundario,
+.acoes-nino button {
+    border: none;
+    border-radius: 22px;
+    padding: 12px 18px;
+    transition: 0.2s;
+}
+
+.btn-escolher,
+.btn-principal {
+    background: #286638;
+    color: white;
+}
+
+.btn-escolher {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.btn-escolher:hover,
+.btn-principal:hover {
+    background: #194D29;
+}
+
+.meu-nino {
+    max-width: 500px;
+    margin: 35px auto 0;
+    padding: 25px;
+    text-align: center;
+    border: 1px solid rgba(39, 99, 51, 0.2);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.meu-nino[hidden],
+.seletor-frases[hidden] {
+    display: none;
+}
+
+.meu-nino > img {
+    width: 170px;
+    height: 170px;
+    object-fit: contain;
+}
+
+.meu-nino p {
+    line-height: 1.7;
+}
+
+.acoes-nino {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.acoes-nino button,
+.btn-secundario {
+    background: #DDEBDD;
+    color: #245B32;
+}
+
+.linha-decorativa {
+    width: 100px;
+    height: 2px;
+    margin: 55px auto;
+    background: rgba(39, 99, 51, 0.25);
+}
+
+.secao-mural {
+    text-align: center;
+}
+
+.btn-principal {
+    margin: 12px auto 25px;
+}
+
+.seletor-frases {
+    max-width: 650px;
+    margin: 0 auto 25px;
+    padding: 20px;
+    border: 1px solid rgba(39, 99, 51, 0.2);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.seletor-frases h3 {
+    margin-top: 0;
+}
+
+.opcao-frase {
+    display: block;
+    width: 100%;
+    margin: 9px 0;
+    padding: 12px;
+    border: 1px solid rgba(39, 99, 51, 0.16);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    color: #254C30;
+    text-align: left;
+    line-height: 1.5;
+}
+
+.opcao-frase:hover {
+    background: #E1F0E1;
+}
+
+.mural {
+    position: relative;
+    min-height: 420px;
+    overflow: hidden;
+    border: 2px dashed rgba(39, 99, 51, 0.32);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.mural-vazio {
+    position: absolute;
+    top: 42%;
+    width: 100%;
+    padding: 0 15px;
+    color: #53775A;
+    text-align: center;
+    pointer-events: none;
+}
+
+.postit {
+    position: absolute;
+    width: 155px;
+    min-height: 130px;
+    padding: 15px 12px;
+    box-shadow: 2px 4px 9px rgba(0, 0, 0, 0.12);
+    color: #51482B;
+    text-align: left;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    overflow-wrap: anywhere;
+}
+
+.postit:active {
+    cursor: grabbing;
+}
+
+.postit p {
+    margin: 0 0 12px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.postit button {
+    border: none;
+    padding: 4px 0;
+    background: transparent;
+    color: #62542F;
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+.postit.amarelo {
+    background: #FFF0A8;
+}
+
+.postit.rosa {
+    background: #F6DCE8;
+    color: #75405B;
+}
+
+.postit.azul {
+    background: #DDE9FF;
+    color: #34527E;
+}
+
+.postit.verde {
+    background: #D9F0D6;
+    color: #355B3A;
+}
+
+.postit.lilas {
+    background: #E9DFFF;
+    color: #594477;
+}
+
+.aviso-mural {
+    color: #42664A;
+    font-size: 0.88rem;
+}
+
+@media (max-width: 750px) {
+    .lista-ninos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .foto-nino {
+        height: 130px;
+    }
+
+    .card-nino {
+        padding: 14px 10px;
+    }
+
+    .postit {
+        width: 135px;
+        min-height: 120px;
+    }
+
+    .mural {
+        min-height: 500px;
+    }
+}
+
+@media (max-width: 420px) {
+    .mascote-container {
+        width: 92%;
+    }
+
+    .lista-ninos {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .foto-nino {
+        height: 105px;
+    }
+
+    .card-nino p {
+        font-size: 0.84rem;
+    }
+
+    .btn-escolher {
+        padding: 10px 7px;
+        font-size: 0.84rem;
+    }
+
+    .postit {
+        width: 125px;
+        min-height: 110px;
+        padding: 11px 9px;
+    }
+
+
+
+/* ===== CENÁRIO DO LAGO DO NINO ===== */
+
+.nino-selecionado {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 25px;
+
+    width: 100%;
+    max-width: 1050px;
+    min-height: 410px;
+    margin: 30px auto 45px;
+    padding: 35px;
+
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 32px;
+
+    /* Céu azul */
+    background:
+        radial-gradient(ellipse at 15% 15%,
+            rgba(255,255,255,.9) 0 5%,
+            transparent 14%),
+        radial-gradient(ellipse at 35% 8%,
+            rgba(255,255,255,.65) 0 4%,
+            transparent 12%),
+        linear-gradient(
+            to bottom,
+            #83d5fa 0%,
+            #c5edff 48%,
+            #72d4e8 49%,
+            #38b6d0 75%,
+            #168cae 100%
+        );
+
+    box-shadow: 0 15px 35px rgba(29, 111, 132, 0.2);
+}
+
+/* Água e reflexos do lago */
+.nino-selecionado::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 43%;
+
+    background:
+        repeating-linear-gradient(
+            175deg,
+            transparent 0 24px,
+            rgba(255,255,255,.28) 25px 27px,
+            transparent 28px 43px
+        ),
+        linear-gradient(
+            to bottom,
+            #61d0df,
+            #168eae
+        );
+}
+
+/* Vitória-régia embaixo do mascote */
+.nino-selecionado::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    left: 5%;
+    bottom: 7%;
+    width: 49%;
+    height: 24%;
+
+    border: 4px solid rgba(70, 145, 55, .8);
+    border-radius: 50%;
+
+    background:
+        repeating-conic-gradient(
+            from 0deg,
+            transparent 0deg 35deg,
+            rgba(39, 112, 43, .45) 36deg 38deg,
+            transparent 39deg 60deg
+        ),
+        radial-gradient(
+            ellipse at 40% 35%,
+            #c5f17b,
+            #70c849 58%,
+            #358b3b 100%
+        );
+
+    box-shadow:
+        0 12px 0 rgba(10, 94, 121, .3),
+        0 18px 22px rgba(0, 67, 86, .2);
+
+    transform: rotate(-5deg);
+}
+
+/* Mascote em destaque sobre a vitória-régia */
+.nino-selecionado > img {
+    position: relative;
+    z-index: 1;
+
+    width: 320px;
+    height: 320px;
+    max-width: 48%;
+    object-fit: contain;
+    flex-shrink: 0;
+
+    filter: drop-shadow(0 12px 9px rgba(22, 83, 57, .2));
+    transition: transform .3s ease;
+}
+
+.nino-selecionado > img:hover {
+    transform: translateY(-7px) scale(1.03);
+}
+
+/* Cartão com informações do Nino */
+.nino-info {
+    position: relative;
+    z-index: 2;
+
+    width: 390px;
+    max-width: 50%;
+    padding: 28px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, .84);
+    border: 2px solid rgba(255, 255, 255, .9);
+    border-radius: 28px;
+
+    box-shadow: 0 10px 28px rgba(24, 93, 107, .12);
+    backdrop-filter: blur(8px);
+}
+
+.nino-info h3 {
+    color: #176448;
+    font-size: 2rem;
+    margin: 0 0 15px;
+}
+
+.nino-info p {
+    color: #315f52;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Ajustes para celular */
+@media (max-width: 650px) {
+    .nino-selecionado {
+        flex-direction: column;
+        gap: 15px;
+        padding: 25px 15px;
+        min-height: 580px;
+    }
+
+    .nino-selecionado > img {
+        width: 260px;
+        height: 260px;
+        max-width: 90%;
+    }
+
+    .nino-selecionado::after {
+        width: 78%;
+        height: 18%;
+        left: 11%;
+        bottom: 48%;
+    }
+
+    .nino-info {
+        width: 100%;
+        max-width: 100%;
+        padding: 22px 16px;
+    }
+
+    .nino-info h3 {
+        font-size: 1.65rem;
+    }
+}
+
+
+}

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mascote - Nino</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/mascote.css">
+</head>
+<body>
+
+    <%- include("partials/nav") %>
+
+    <main class="mascote-container">
+
+        <header class="mascote-intro">
+            <span class="etiqueta">SEU CANTINHO ESPECIAL</span>
+            <h1>Mascote</h1>
+            <p>Escolha o Nino que mais combina com você e monte seu mural de carinho.</p>
+        </header>
+
+        <!-- ESCOLHA DO NINO -->
+        <section class="secao-ninos">
+            <h2>Qual Nino combina com você?</h2>
+            <p class="descricao-secao">
+                Cada Nino tem seu próprio jeitinho. Escolha o que mais representa você!
+            </p>
+
+            <div class="lista-ninos" id="listaNinos">
+
+                <article class="card-nino" data-id="1">
+                    <div class="foto-nino">
+                        <img src="/imagesNino/mascotes/lezzi.png" alt="LEZZI">
+                    </div>
+                    <h3>LEZZI</h3>
+                    <p>Carinhoso e acolhedor, valoriza os momentos de alegria.</p>
+                    <button class="btn-escolher" type="button">Escolher este Nino</button>
+                </article>
+
+                <article class="card-nino" data-id="2">
+                    <div class="foto-nino">
+                        <img src="/imagesNino/mascotes/bilu.png" alt="BILU">
+                    </div>
+                    <h3>BILU</h3>
+                    <p>Calmo e tranquilo, lembra você de respeitar seu tempo.</p>
+                    <button class="btn-escolher" type="button">Escolher este Nino</button>
+                </article>
+
+                <article class="card-nino" data-id="3">
+                    <div class="foto-nino">
+                      <img src="/imagesNino/mascotes/tata.png" alt="TATA">
+                    </div>
+                    <h3>TATA</h3>
+                    <p>Alegre e espontâneo, sabe ser forte diante de tudo.</p>
+                    <button class="btn-escolher" type="button">Escolher este Nino</button>
+                </article>
+
+                <article class="card-nino" data-id="4">
+                    <div class="foto-nino">
+                        <img src="/imagesNino/mascotes/vit.png" alt="VIT">
+                    </div>
+                    <h3>VIT</h3>
+                    <p>Sensível e atencioso, entende que todos os sentimentos importam.</p>
+                    <button class="btn-escolher" type="button">Escolher este Nino</button>
+                </article>
+
+                <article class="card-nino" data-id="5">
+                    <div class="foto-nino">
+                        <img src="/imagesNino/mascotes/yama.png" alt="YAMA">
+                    </div>
+                    <h3>YAMA</h3>
+                    <p>Corajoso e persistente, incentiva você a seguir no seu ritmo.</p>
+                    <button class="btn-escolher" type="button">Escolher este Nino</button>
+                </article>
+
+                <article class="card-nino" data-id="6">
+                    <div class="foto-nino">
+                        <img src="/imagesNino/mascotes/vickie.png" alt="VICKIE">
+                    </div>
+                    <h3>VICKIE</h3>
+                    <p>Criativo e empático, te mostra que tudo bem descansar quando necessário.</p>
+                    <button class="btn-escolher" type="button">Escolher este Nino</button>
+                </article>
+
+            </div>
+
+            <!-- NINO SELECIONADO -->
+            <div class="meu-nino" id="meuNino" hidden>
+                <h2>Seu Nino</h2>
+
+                <img id="fotoSelecionada" src="" alt="Seu Nino escolhido">
+
+                <h3 id="nomeSelecionado"></h3>
+                <p id="descricaoSelecionada"></p>
+
+                <div class="acoes-nino">
+                    <button type="button" id="btnEditarNino">Trocar Nino</button>
+                    <button type="button" id="btnApagarNino">Apagar escolha</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="linha-decorativa"></div>
+
+        <!-- MURAL DE POST-ITS -->
+        <section class="secao-mural">
+            <h2>Meu mural</h2>
+            <p class="descricao-secao">
+                Escolha as frases do dia. Depois, arraste cada post-it para o lugar que preferir.
+            </p>
+
+            <button type="button" id="btnEscolherFrase" class="btn-principal">
+                + Escolher uma frase
+            </button>
+
+            <div class="seletor-frases" id="seletorFrases" hidden>
+                <h3>Escolha sua frase</h3>
+                <div id="listaFrases"></div>
+                <button type="button" id="btnFecharFrases" class="btn-secundario">
+                    Fechar
+                </button>
+            </div>
+
+            <div class="mural" id="mural" aria-label="Mural de frases">
+                <p class="mural-vazio" id="muralVazio">
+                    Suas frases escolhidas aparecerão aqui.
+                </p>
+            </div>
+
+            <p class="aviso-mural">
+                Você pode arrastar os post-its para organizar seu mural.
+            </p>
+        </section>
+
+    </main>
+
+  
+<script src="/js/nav.js"></script>
+<script type="module" src="/js/mascote.js"></script>
+</body>
+</html>

@@ -126,6 +126,7 @@ body {
     font-weight: 600;
 }
 
+
 @media (max-width: 360px) {
     .pagina-membros {
         padding-right: 8px;
@@ -152,3 +153,112 @@ body {
         font-size: 0.72rem;
     }
 }
+
+/* Seção do criador */
+.secao-criador {
+    width: min(900px, 92%);
+    margin: 50px auto;
+}
+
+.secao-criador[hidden] {
+    display: none !important;
+}
+
+.conteudo-criador {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 28px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.45);
+}
+
+#imagem-nino-criador {
+    display: block;
+    width: 55px !important;
+    height: 55px !important;
+    max-width: 55px !important;
+    object-fit: contain;
+    flex: 0 0 55px;
+}
+
+.texto-criador {
+    max-width: 480px;
+}
+
+.subtitulo-criador {
+    color: #357a45;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.texto-criador h2 {
+    color: #245b31;
+    margin: 8px 0;
+}
+
+#fala-criador {
+    line-height: 1.6;
+}
+
+#nome-criador {
+    color: #245b31;
+    font-weight: bold;
+}
+
+/* Celular */
+@media (max-width: 600px) {
+    .conteudo-criador {
+        flex-direction: column;
+        text-align: center;
+        padding: 22px;
+    }
+
+    #imagem-nino-criador {
+        width: 100px !important;
+        height: 100px !important;
+        max-width: 100px !important;
+        flex-basis: 100px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .conteudo-criador {
+        flex-direction: column;
+        text-align: center;
+        padding: 22px;
+    }
+
+    #imagem-nino-criador {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+
+/* Nino pequeno no computador */
+@media (min-width: 601px) {
+    .conteudo-criador #imagem-nino-criador {
+        width: 200px !important;
+        height: 200px !important;
+        max-width: 200px !important;
+        min-width: 0 !important;
+        object-fit: contain;
+        flex: 0 0 200px !important;
+    }
+}
+
+/* Celular: manter como está */
+@media (max-width: 600px) {
+    .conteudo-criador #imagem-nino-criador {
+        width: 100px !important;
+        height: 100px !important;
+        max-width: 100px !important;
+        object-fit: contain;
+    }
+}
+
+
