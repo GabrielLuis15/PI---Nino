@@ -45,7 +45,4 @@ app.get("/", (req, res) => {
     res.render("inicio");
 });
 
-// Inicialização do servidor
-app.listen(3000, () => {
-    console.log("Nino rodando em http://localhost:3000");
-});
+module.exports = app;
