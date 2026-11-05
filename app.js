@@ -18,7 +18,6 @@ const graficoRoutes = require("./routes/grafico");
 const membrosRoutes = require("./routes/membros");
 const mascoteRoutes = require("./routes/mascote");
 
-
 // Rotas de autenticação
 app.get("/login", (req, res) => {
     res.render("login");
@@ -32,7 +31,7 @@ app.get("/mascote", (req, res) => {
     res.render("mascote");
 });
 
-// Registro das rotas existentes
+// Registro das rotas
 app.use(registroRoutes);
 app.use(calendarioRoutes);
 app.use("/conforto", confortoRoutes);
@@ -45,4 +44,9 @@ app.get("/", (req, res) => {
     res.render("inicio");
 });
 
-module.exports = app;
+// Inicialização do servidor
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
