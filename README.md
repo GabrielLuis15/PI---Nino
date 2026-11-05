@@ -109,5 +109,5 @@ Mais do que registrar emoções, queremos que o projeto incentive os estudantes 
 ## 🔗 Links importantes
 
 - **Repositório no GitHub:** https://github.com/GabrielLuis15/PI---Nino
-- **Projeto publicado:** https://pi-nino-2.onrender.com
+- **Projeto publicado:** https://pi-nino-3.onrender.com
 - **Vídeo Pitch:** https://youtube.com/watch?v=W5IekBcm5_Q&is=LhCLLb5l9okn_Lz1
