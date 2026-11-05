@@ -49,6 +49,8 @@ O projeto utiliza uma organização baseada em rotas, páginas e arquivos estát
 
 O Pitch busca apresentar algumas funcionalidades que o projeto principal oferece, como uma central de ajuda, check-ins emocionais e alguns mascotes, cada um com personalidades diferentes, para o usuário escolher o mascote que ele mais se identificar, além de dizer o que motivou a idealização e a criação desse projeto: a carga que pesa nos estudantes, sejam de escolas públicas, técnicas ou particulares, ou de, até mesmo, faculdades.
 
+- **Vídeo Pitch:** https://youtube.com/watch?v=W5IekBcm5_Q&is=LhCLLb5l9okn_Lz1
+
 ## ▶️ Como executar o projeto localmente
 
 Para executar o Nino no computador, siga os passos abaixo:
@@ -108,3 +110,4 @@ Mais do que registrar emoções, queremos que o projeto incentive os estudantes 
 
 - **Repositório no GitHub:** https://github.com/GabrielLuis15/PI---Nino
 - **Projeto publicado:** https://pi-nino-2.onrender.com
+- **Vídeo Pitch:** https://youtube.com/watch?v=W5IekBcm5_Q&is=LhCLLb5l9okn_Lz1
