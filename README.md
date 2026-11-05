@@ -45,6 +45,10 @@ O projeto utiliza uma organização baseada em rotas, páginas e arquivos estát
 - `public/`: arquivos estáticos, como CSS, JavaScript e imagens.
 - `config/`: configurações utilizadas pelo projeto.
 
+## 🎤 Sobre o Pitch
+
+O Pitch busca apresentar algumas funcionalidades que o projeto principal oferece, como uma central de ajuda, check-ins emocionais e alguns mascotes, cada um com personalidades diferentes, para o usuário escolher o mascote que ele mais se identificar, além de dizer o que motivou a idealização e a criação desse projeto: a carga que pesa nos estudantes, sejam de escolas públicas, técnicas ou particulares, ou de, até mesmo, faculdades.
+
 ## ▶️ Como executar o projeto localmente
 
 Para executar o Nino no computador, siga os passos abaixo:
@@ -81,7 +85,7 @@ O projeto está hospedado no Render.
 
 ## 📱 Aplicativo mobile
 
-A versão mobile faz parte da proposta do projeto. As instruções e o link para testar ou baixar o aplicativo serão adicionados quando estiverem disponíveis.
+A versão mobile faz parte da proposta do projeto. As instruções para testá-lo é, basicamente, ler o QRCode que está disponível dentro da plataforma que desenvolvemos o projeto, a saber, o snack.expo.dev, utilizando React Native para ler os dados salvos dentro do projeto principal.
 
 ## 👥 Integrantes
 
